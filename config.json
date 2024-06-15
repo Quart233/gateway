@@ -1,0 +1,23 @@
+{
+    "inbounds": [
+        {
+            "listen": "0.0.0.0",
+            "port": 53,
+            "protocol": "udp",
+            "tag": "dns_out"
+        }
+    ],
+    "dns": {
+        "servers": [
+            { "address": "FAKEDNS", "port": 53 },
+            { "address": "ISPDNS", "port": 53, "domains": ["geosite:cn"], "expectIPs": ["geoip:cn"] }
+        ],
+        "queryStrategy": "UseIPv4",
+        "disableCache": true,
+        "disableFallback": true,
+        "tag": "dns"
+    },
+    "routing": {},
+    "policy": {},
+    "outbounds": [ { "tag": "direct", "sendThrough": "Interface", "protocol": "freedom" } ]
+}

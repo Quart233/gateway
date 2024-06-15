@@ -1,0 +1,20 @@
+allow-lan: false
+tun:
+  enable: true
+  stack: system
+  auto-route: true
+  auto-detect-interface: true
+
+proxies:
+  - name: "ss-out2"
+    type: ss
+    server: server
+    port: 443
+    ip-version: ipv4
+    udp: true
+    interface-name: eth0
+    routing-mark: 1234
+    tfo: false
+    mptcp: false
+
+    dialer-proxy: ss1

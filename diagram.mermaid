@@ -3,7 +3,7 @@ flowchart TD
     client --> OPNsense
 
     subgraph v2ray
-        inbounds -->|tag: UDP 53| DNS --> outbounds
+        inbounds[dokodemo-door] -->|tag: dns_in| Router -->|forward| outbounds -->|protocol: dns| DNS
     end
 
     v2ray -->|geosite:cn| ISPDNS
@@ -11,5 +11,4 @@ flowchart TD
 
     OPNsense -->|Default| PPPOE
     OPNsense -->|FAKEIP| META
-    META -->|L2| client
     OPNsense -->|DNS| v2ray

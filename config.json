@@ -1,10 +1,16 @@
 {
     "inbounds": [
         {
-            "listen": "0.0.0.0",
             "port": 53,
-            "protocol": "udp",
-            "tag": "dns_out"
+            "tag": "dns_in",
+            "protocol": "dokodemo-door",
+            "setttings": {
+                "address": "LOCALDNS",
+                "port": 53,
+                "network": "udp",
+                "timeout": 0,
+                "followRedirect": false
+            }
         }
     ],
     "dns": {
@@ -17,7 +23,20 @@
         "disableFallback": true,
         "tag": "dns"
     },
-    "routing": {},
+    "routing": {
+        "rules": [
+            {
+                "type": "field",
+                "inboundTags": ["dns_in"],
+                "outboundTag": "forward"
+            }
+        ]
+    },
     "policy": {},
-    "outbounds": [ { "tag": "direct", "sendThrough": "Interface", "protocol": "freedom" } ]
+    "outbounds": [
+        {
+            "tag": "forward",
+            "protocol": "dns" 
+        } 
+    ]
 }

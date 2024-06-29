@@ -6,7 +6,7 @@ flowchart TD
         inbounds[dokodemo-door] -->|tag: dns_in| Router -->|forward| outbounds -->|protocol: dns| DNS[DNS CacheDisabled]
     end
 
-    v2ray -->|geosite:cn| Unbound[OPNsense DNS]
-    v2ray -->|default route| FAKEDNS[Meta DNS]
+    v2ray -->|geosite:cn| LOCALDNS
+    v2ray -->|default| FAKEDNS
 
     

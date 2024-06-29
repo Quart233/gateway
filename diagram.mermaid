@@ -1,14 +1,12 @@
 flowchart TD
 
-    client --> OPNsense
+    Client -->|DNS Requst| v2ray
 
     subgraph v2ray
-        inbounds[dokodemo-door] -->|tag: dns_in| Router -->|forward| outbounds -->|protocol: dns| DNS
+        inbounds[dokodemo-door] -->|tag: dns_in| Router -->|forward| outbounds -->|protocol: dns| DNS[DNS CacheDisabled]
     end
 
-    v2ray -->|geosite:cn| ISPDNS
-    v2ray -->|others| FAKEDNS
+    v2ray -->|geosite:cn| Unbound[OPNsense DNS]
+    v2ray -->|default route| FAKEDNS[Meta DNS]
 
-    OPNsense -->|Default| PPPOE
-    OPNsense -->|FAKEIP| META
-    OPNsense -->|DNS| v2ray
+    

@@ -9,4 +9,11 @@ flowchart TD
     v2ray -->|geosite:cn| LOCALDNS
     v2ray -->|default| FAKEDNS
 
+    Client -->|TCP/UDP| Gateway
+
+    subgraph Gateway[OPNsense]
+        LAN[Incoming Connections] --> |src: !TUN dst: FakeIP Range| TUN[TUN: Rule base proxy] -->|dst: Proxies| WAN_PPOE
+        LAN --> |others|WAN_PPOE
+    end
+
     

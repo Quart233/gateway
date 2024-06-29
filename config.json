@@ -9,7 +9,7 @@
             "protocol": "dokodemo-door",
             "settings": {
                 "address": "127.0.0.1",
-                "port": 9494,
+                "port": 1053,
                 "network": "tcp,udp",
                 "timeout": 0,
                 "followRedirect": false,

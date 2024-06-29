@@ -20,5 +20,40 @@ eth1: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP qlen 
        valid_lft forever preferred_lft forever
     inet6 fe80::a236:9fff:fe50:befa/64 scope link 
        valid_lft forever preferred_lft forever
-
 ```
+
+## DNS Dispatcher
+
+### 1. Install Packages
+```shell
+apk add v2ray
+```
+
+### 2. Copy config
+```shell
+cp config.json /etc/v2ray/config.json
+```
+
+### 3. Active service
+```shell
+rc-update add v2ray
+rc-status
+```
+
+Shell output:
+```
+Runlevel: default
+ sshd                              [  started  ]
+ v2ray                             [  stopped  ]
+ acpid                             [  started  ]
+ qemu-guest-agent                  [  started  ]
+ crond                             [  started  ]
+Dynamic Runlevel: hotplugged
+Dynamic Runlevel: needed/wanted
+ sysfs                             [  started  ]
+ fsck                              [  started  ]
+ root                              [  started  ]
+ localmount                        [  started  ]
+Dynamic Runlevel: manual
+```
+

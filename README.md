@@ -1,3 +1,6 @@
+# Introduction
+Advance the advantage of fake-ip or redir as gateway benifit for different application need.
+See [Here](diagram.mermaid)
 # Requirements
 - OS: Alpine Linux 3.9
 - Packages: linux-firmware-rtl_nic linux-lts v2ray

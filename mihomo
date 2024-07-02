@@ -2,7 +2,7 @@
 # Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-CONFIG_DIR="/etc/mihomo"
+CONFIG="/etc/mihomo"
 PIDFILE="/run/mihomo.pid"
 LOGFILE="/var/log/mihomo.log"
 
@@ -11,8 +11,8 @@ depend() {
 }
 
 checkconfig() {
-	if [ ! -f ${CONFIG_DIR}/config.json ]; then
-		ewarn "${CONFIG_DIR}/config.json does not exist."
+	if [ ! -f ${CONFIG} ]; then
+		ewarn "${CONFIG} does not exist."
 	fi
 }
 
@@ -24,7 +24,7 @@ start() {
 	start-stop-daemon --start	\
 	-b -1 ${LOGFILE} -2 ${LOGFILE}	\
 	-m -p ${PIDFILE}		\
-	--exec /usr/bin/mihomo -d ${CONFIG_DIR}
+	--exec /usr/bin/mihomo -f ${CONFIG}
 	eend $?
 }
 

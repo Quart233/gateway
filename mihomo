@@ -1,0 +1,35 @@
+#!/sbin/openrc-run
+# Copyright 1999-2018 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+
+CONFIG_DIR="/etc/mihomo"
+PIDFILE="/run/mihomo.pid"
+LOGFILE="/var/log/mihomo.log"
+
+depend() {
+	need net
+}
+
+checkconfig() {
+	if [ ! -f ${CONFIG_DIR}/config.json ]; then
+		ewarn "${CONFIG_DIR}/config.json does not exist."
+	fi
+}
+
+start() {
+	checkconfig || return 1
+
+	ebegin "Starting mihomo"
+	ebegin "Log File : ${LOGFILE}"
+	start-stop-daemon --start	\
+	-b -1 ${LOGFILE} -2 ${LOGFILE}	\
+	-m -p ${PIDFILE}		\
+	--exec /usr/bin/mihomo -d ${CONFIG_DIR}
+	eend $?
+}
+
+stop() {
+	ebegin "Stopping mihomo"
+	start-stop-daemon --stop -p ${PIDFILE}
+	eend $?
+}

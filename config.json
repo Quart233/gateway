@@ -8,8 +8,8 @@
             "tag": "dns_in",
             "protocol": "dokodemo-door",
             "settings": {
-                "address": "127.0.0.1",
-                "port": 1053,
+                "address": "192.168.24.1",
+                "port": 53,
                 "network": "tcp,udp",
                 "timeout": 0,
                 "followRedirect": false,
@@ -19,11 +19,13 @@
     ],
     "dns": {
         "servers": [
+            { "address": "127.0.0.1", "port": 1053 },
             { "address": "192.168.24.1", "port": 53, "domains": ["geosite:cn"], "expectIPs": ["geoip:cn"] }
         ],
         "queryStrategy": "USE_IP4",
         "cacheStrategy": "CacheDisabled",
-        "fallbackStrategy": "Disabled"
+        "fallbackStrategy": "DisabledIfAnyMatch"
+
     },
     "routing": {
         "rules": [
@@ -38,8 +40,7 @@
     "outbounds": [
         {
             "tag": "forward",
-            "protocol": "dns" 
+            "protocol": "dns"
         }
     ]
 }
-

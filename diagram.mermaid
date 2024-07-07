@@ -4,8 +4,14 @@ flowchart TD
 
     subgraph v2ray
         dokodemo-door --> |tag: dns_in| router -->|protocol: dns| DNS[DNS CacheDisabled]
-        tun --> |tag: tun_in| router -->|tun2socks| Meta
+        tun --> |tag: tun_in| router -->|protocol: socks5| socks5-out
     end
+
+    subgraph Meta
+        connection --> proxies
+    end
+
+    v2ray -->|socks5-out| Meta -->|remote endpoints| Gateway
 
     subgraph DNS
         domain -->|geosite:cn| LOCALDNS
@@ -18,5 +24,7 @@ flowchart TD
         LAN[Incoming Connections] --> |src: !TUN dst: FakeIP Range| TUN[TUN: Rule base proxy] -->|dst: Proxies| WAN_PPOE
         LAN --> |others|WAN_PPOE
     end
+
+    Gateway -->|redirect| v2ray
 
     

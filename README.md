@@ -60,3 +60,11 @@ Dynamic Runlevel: needed/wanted
 Dynamic Runlevel: manual
 ```
 
+## Load TUN
+```shell
+modprobe tun
+```
+```shell
+echo "tun" >> /etc/modules
+```
+
